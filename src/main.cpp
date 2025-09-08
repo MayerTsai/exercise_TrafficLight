@@ -1,6 +1,4 @@
 #include <Arduino.h>
-#include <stdio.h>
-// #include "my_light.h"
 #include "my_signal.h"
 
 const int G_pin = 2;
@@ -30,19 +28,16 @@ void setup()
   for (int i = 0; i < intersections; i++)
   {
     set_traffic_pin(&x[i], G_pin + i * 3, Y_pin + i * 3, R_pin + i * 3);
-    Serial.println(x[i].G_pin);
-    Serial.println(x[i].Y_pin);
-    Serial.println(x[i].R_pin);
   }
 }
 
 void loop()
 {
   // traffic_signal(intersections, x);
-
+  Serial.println();
+  Serial.println("--------------------------------------------------------");
   for (int i = 0; i < intersections; i++)
   {
-
     int state = my_light(i, Y_Time, light_status); // my_light = 0紅 1綠 2黃
 
     switch (state)
@@ -68,16 +63,24 @@ void loop()
     digitalWrite(x[i].Y_pin, Y_traffic);
     digitalWrite(x[i].R_pin, R_traffic);
 
-    // Serial.print(x[i].G_pin);
-    // Serial.print(G_traffic);
-    // Serial.print(x[i].Y_pin);
-    // Serial.print(Y_traffic);
-    // Serial.print(x[i].R_pin);
-    // Serial.print(R_traffic);
+    Serial.print(x[i].G_pin);
+    Serial.print("(");
+    Serial.print(G_traffic);
+    Serial.print(")-");
+
+    Serial.print(x[i].Y_pin);
+    Serial.print("(");
+    Serial.print(Y_traffic);
+    Serial.print(")-");
+
+    Serial.print(x[i].R_pin);
+    Serial.print("(");
+    Serial.print(R_traffic);
+    Serial.print(")\t");
   }
-  Serial.println();
+
   G_Time++;
-  if (G_Time >= G) // 綠燈時間5s
+  if ((G_Time >= G) && (Y_Time <= Y)) // 綠燈時間5s
   {
     Y_Time++;
   }
@@ -85,16 +88,10 @@ void loop()
   {
     Y_Time = 0;
     G_Time = 0;
-  }
-  if (G_Time == 0)
     light_status++;
-
-  if (light_status == intersections)
-  {
-    light_status = 0;
+    if (light_status >= intersections)
+      light_status = 0;
   }
-
-  printf("\n");
 
   delay(1000);
 }
