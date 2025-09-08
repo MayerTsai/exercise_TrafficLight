@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <Arduino.h>
+// #include <stdio.h>
 #include "my_light.h"
 
 int R_traffic = 0;
@@ -40,9 +40,16 @@ void traffic_signal(int road, traffic_light *ptr_light)
     }
     digitalWrite(ptr_light[i].G_pin, G_traffic);
     digitalWrite(ptr_light[i].Y_pin, Y_traffic);
-    digitalWrite(ptr_light[i].R_pin, G_traffic);
-  }
+    digitalWrite(ptr_light[i].R_pin, R_traffic);
 
+    // Serial.print(ptr_light[i].G_pin);
+    // Serial.print(G_traffic);
+    // Serial.print(ptr_light[i].Y_pin);
+    // Serial.print(Y_traffic);
+    // Serial.print(ptr_light[i].R_pin);
+    // Serial.print(R_traffic);
+  }
+  // Serial.println();
   G_Time++;
   if (G_Time >= G) // 綠燈時間5s
   {

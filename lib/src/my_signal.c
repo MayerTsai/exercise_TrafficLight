@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <Arduino.h>
 #include "my_signal.h"
-#include "my_light.h"
+// #include "my_light.h"
 
 // const int G_pin = 2;
 // const int Y_pin = 3;
 // const int R_pin = 4;
-int V_set;
+// int V_set;
 
 // 使用標準 C 函式定義，並採用 my_signal.h 中更具描述性的參數名稱
 int my_light(int current_intersection, int Y_time, int active_intersection)
