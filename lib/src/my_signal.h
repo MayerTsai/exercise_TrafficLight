@@ -1,28 +1,22 @@
-#include <stdio.h>
 #ifndef MY_SIGNAL_H
 #define MY_SIGNAL_H
+#include <stdio.h>
 
-#ifdef __cplusplus
-extern "C"
+
+const int RED = 0;
+const int GREEN = 1;
+const int YELLOW = 2;
+
+typedef struct
 {
-#endif
+  int G_pin;
+  int Y_pin;
+  int R_pin;
+  int state; // 0: Red, 1: Green, 2: Yellow
+} traffic_light;
 
-  typedef struct
-  {
-    int G_pin;
-    int Y_pin;
-    int R_pin;
-  } traffic_light;
+int my_light(int current_intersection, int active_intersection, int Y_time);
+void set_traffic_pin(traffic_light *x, int, int, int);
+void set_traffic_state(traffic_light *x, int state);
 
-  // 決定單一號誌的狀態
-  // 回傳 0 代表紅燈, 1 代表綠燈, 2 代表黃燈
-  // current_intersection: 我們正在檢查的號誌索引 (例如 0, 1, 2...)
-  // active_intersection:  應該亮綠燈或黃燈的號誌索引
-  // Y_time:                 用於控制黃燈狀態的計時器
-  int my_light(int current_intersection, int active_intersection, int Y_time);
-  void set_traffic_pin(traffic_light *x, int, int, int);
-
-#ifdef __cplusplus
-}
-#endif
 #endif
