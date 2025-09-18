@@ -15,7 +15,6 @@ typedef struct
   int state; // 0: Red, 1: Green, 2: Yellow
 } traffic_light;
 
-int my_light(int current_intersection, int active_intersection, int Y_time);
 void set_traffic_pin(traffic_light *x, int, int, int);
 void set_traffic_state(traffic_light *x, int state);
 
